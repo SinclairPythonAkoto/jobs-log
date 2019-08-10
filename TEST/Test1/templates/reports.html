@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>TEST Log Report</h1>
+<br>
+<br>
+<p>Please select the report you wish to run below.</p>
+
+<form action="{{ url_for('reports') }} " method="post">
+	<div>
+		<table>
+			<tr>
+				<th>TEST Reports</th>
+			</tr>
+			<tr>
+				<td>
+					<select name="report_options">
+						<option disabled selected value="">Select Report Type</option>
+						<option value="name">Name</option>
+						<option value="age">Age</option>
+						<option value="profession">Profession</option>
+						<option value="city">City</option>
+						<option value="country">Country</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<button type="submit">RUN REPORT</button>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+
+
+	<div>
+		<table>
+			{% if data_name %}
+			<h2>Name Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>NAME</th>
+		      	</tr>
+		      	{% for d in data_name %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.name }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if data_age %}
+		    <h2>Age Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>AGE</th>
+		    	</tr>
+		    	{% for d in data_age %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.age }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if data_prof %}
+		    <h2>Profession Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>PROFESSION</th>
+		    	</tr>
+		    	{% for d in data_prof %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.profession }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if data_city %}
+			<h2>City Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>CITY</th>
+		      	</tr>
+		      	{% for d in data_city %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.city }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if data_country %}
+			<h2>Country Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>COUNTRY</th>
+		      	</tr>
+		      	{% for d in data_country %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.country }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+	    </table>
+	</div>
+</form>
+
+<footer>
+	<a href="{{ url_for('home') }}">Home</a>
+</footer>
+{% endblock %}
