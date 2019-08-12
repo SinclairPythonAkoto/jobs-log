@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Sinclair's TEST Log</h1>
+<h5>Joining two tables trogther with foreign keys</h5>
+
+<p>Please enter your details <strong>below</strong>.</p>
+
+<form action="{{ url_for('home') }}" method="post">
+  <div>
+    <table>
+      <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>PROFESSION</th>
+        <th>CITY</th>
+        <th>COUNTRY</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="name" placeholder="Name" required>
+        </td>
+        <td>
+          <input type="number" name="age" placeholder="Age" required>
+        </td>
+        <td>
+          <select name="profession">
+            <option disabled selected value="">Select Profession</option>
+            <option value="media">MEDIA</option>
+            <option value="catering">CATERING</option>
+            <option value="security">SECURITY</option>
+            <option value="web">WEB DEVELOPER</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" name="city" placeholder="City" required>
+        </td>
+        <td>
+          <input type="text" name="country" placeholder="Country" required>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button>SUBMIT</button>
+  </div>
+  <br>
+  <div>
+    <p>Click <a href="{{ url_for('reports') }}"><strong>here</strong></a> to run a report.</p>
+  </div>
+  <br>
+  <br>
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>PROFESSION</th>
+        <th>CITY</th>
+        <th>COUNTRY</th>
+      </tr>
+      {% for d in data %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.name }}</td>
+          <td>{{ d.age }}</td>
+          <td>{{ d.profession }}</td>
+          <td>{{ d.city }}</td>
+          <td>{{ d.country }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</form>
+
+{% endblock %}

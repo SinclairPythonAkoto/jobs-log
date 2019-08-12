@@ -1,0 +1,199 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>TEST Log Report</h1>
+<br>
+<br>
+<p>Please select the report you wish to run below.</p>
+
+<form action="{{ url_for('reports') }} " method="post">
+	<div>
+		<table>
+			<tr>
+				<th>TEST Reports</th>
+			</tr>
+			<tr>
+				<td>
+					<select name="report_options">
+						<option disabled selected value="">Select Report Type</option>
+						<option value="all_db"> -- ALL -- </option>
+						<option value="name">Name</option>
+						<option value="age">Age</option>
+						<option value="media_prof">Media Professionals</option>
+						<option value="catering_prof">Catering Contractors</option>
+						<option value="security_prof">Security Officers</option>
+						<option value="web_prof">Web Developers</option>
+						<option value="city">City</option>
+						<option value="country">Country</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<button type="submit" name="report_btn">RUN REPORT</button>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+
+	<div>
+		<table>
+			{% if db_entry %}
+			<h2>Full Report</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>NAME</th>
+			        <th>AGE</th>
+			        <th>PROFESSION</th>
+			        <th>CITY</th>
+			        <th>COUNTRY</th>
+		      	</tr>
+		      	{% for d in db_entry %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.name }}</td>
+			        <td>{{ d.age }}</td>
+			        <td>{{ d.profession }}</td>
+			        <td>{{ d.city }}</td>
+			        <td>{{ d.country }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+
+			{% if data_name %}
+			<h2>Name Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>NAME</th>
+		      	</tr>
+		      	{% for d in data_name %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.name }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if data_age %}
+		    <h2>Age Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>AGE</th>
+		    	</tr>
+		    	{% for d in data_age %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.age }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if media_prof %}
+		    <h2>Media Freelancer Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>NAME</th>
+		    		<th>PROFESSION</th>
+		    	</tr>
+		    	{% for d in media_prof %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.name }}</td>
+		    		<td>{{ d.profession }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if catering_prof %}
+		    <h2>Catering Contracter Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>NAME</th>
+		    		<th>PROFESSION</th>
+		    	</tr>
+		    	{% for d in catering_prof %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.name }}</td>
+		    		<td>{{ d.profession }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if security_prof %}
+		    <h2>Security Officer Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>NAME</th>
+		    		<th>PROFESSION</th>
+		    	</tr>
+		    	{% for d in security_prof %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.name }}</td>
+		    		<td>{{ d.profession }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if web_prof %}
+		    <h2>Web Developer Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>NAME</th>
+		    		<th>PROFESSION</th>
+		    	</tr>
+		    	{% for d in web_prof %}
+	    		<tr>
+		    		<td>{{ d.id }}</td>
+		    		<td>{{ d.name }}</td>
+		    		<td>{{ d.profession }}</td>
+	    		</tr>
+		    	{% endfor %}
+		    	<br>
+		    	<br>
+		    	<p>Please enter your email below if you wish to send this report.</p>
+		    	<input type="text" name="email" placeholder="Enter Email" required> <input type="text" name="confirm_email" placeholder="Confirm Email" required>
+		    	<button type="submit" name="email_btn">SEND EMAIL</button>
+		    	
+
+		    {% endif %}		    
+
+		    {% if data_city %}
+			<h2>City Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>CITY</th>
+		      	</tr>
+		      	{% for d in data_city %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.city }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if data_country %}
+			<h2>Country Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>COUNTRY</th>
+		      	</tr>
+		      	{% for d in data_country %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+		        	<td>{{ d.country }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+	    </table>
+	</div>
+</form>
+
+<footer>
+	<a href="{{ url_for('home') }}">Home</a>
+</footer>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TEST Log</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: lightgray;
+        }
+    </style>
+    <body>
+        {% block body %}
+
+        {% block content %}{% endblock %}
+
+        {% endblock %}
+    </body>
+</html>

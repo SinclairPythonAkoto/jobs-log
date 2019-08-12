@@ -55,3 +55,47 @@ CONCLUSION:	I like the way I add data into the database by creating a variable
 		* The DATABASE_URL is your environment variable you can create in Heroku or Bash.
 
 		REMEMBER!! to session.commit() AFTER you session.add(db_entry) !
+
+# TP-5		[test2.py]
+AIM:		Change the profession so the user can choose from an option of 4 different professions (media, catering, security, web developer).
+			Include date category for users to input.
+			Will have to use filter_by() method to match each profession.
+			Develop more detailed searches.
+			
+OUTCOME:	Had to create a new table "test2_table" and replace the table-name "test_table" in the class.
+			In postgres to create a date coloumn you would put DATE, TIME or TIMESTAMP.
+			For my purpose I will use DATE; in SQLAlchemy you use Column('column-name', Date)
+			Found the way to join two tables togther in SQLAlchemy; will soon test.
+			Also created a group of dummy data (entries from test.py) in my postgress.
+			So far I have created the two tables (in postgres CLI & Flask) and linked the two tables togther.
+			I have also changed the report functionality for the profession catergory - which works! I have only tested it on
+			At first I tried to do session.query(table).filter(table.column='value') but this did not work because of the syntax error.  The correct way is: session.query(table).filter(table.column=='value'); there is also filter_by() method which I'm yet to explore.
+
+# TP-6		[test2.py]
+AIM:		create data for salary table; only 5-10 entries
+			chnage the information displayed in profession table after a report is run; should be able to view: id, name, profession
+			After that include the salary and join two together.
+			Include flash messages to give the user a message everytime they log an entry; can be used to give user different messages throughout web app.
+
+OUTCOME:	I have tried to link the tables togther using the psql CLI and the .join()
+syntax but it failed.
+			I have seen a video tutorial of creating one-to-many relationships; also the explaination of how 'backref' is used - I need to look more into it.
+			As far as I'm aware, backref gives a virtual-like colum attached to the class.
+			I will make an attempt of this to join the two tables together.
+			I can't seem to be able to link my two tables togther; I know how to do it with the psql commmand line, however I don't know how to do it successfully with SQLAlchemy
+			I want to delete the tables and start again but I think I would come across the same errors.
+			OK I will delete (drop) the yearly_salary table; infact I will rename it and call the table column 'wages'.  I have seen a documentation that explains how building relatoionships between classes work.  If I try out the documentation first before creating a new table.
+			I have spent literally 48hrs trying to get the two tables to join; I have achieved this in my postgres - when it is joined a new table with all the fields are contructed.
+			I have intalled sqlitis which onverts SQL syntax into SQLAlchemy expressions.
+			test2.py ON HOLD.
+
+# TP-7		[test3.py]
+AIM:		To create a platform to send an email of the report entries to any given email supplied by the user.
+
+OUTCOME:	I had to recreate my main table on the PSQL command line - test3_table.
+			I also changed the name of the database class so it is capitalised and matching the table name.
+			I entered the table data through PSQL CLI
+			I had to change the table columns and entries in "reports.html" & "test3.py"
+			I included some more entries into html reports page; within each jinja iterable template, included an input email & send email tag.  With the iput email assigned to a name attribute, it becomes easier to select the value and pass it into my python variable.
+			** I used the "try:" method for the first time but it didn't work.
+			I need to find a way to execute two different buttons (to give two different outcomes) in the same form tag.
