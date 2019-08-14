@@ -89,7 +89,22 @@ syntax but it failed.
 			I have intalled sqlitis which onverts SQL syntax into SQLAlchemy expressions.
 			test2.py ON HOLD.
 
-# TP-7		[test3.py]
+# TP-7		[test2.py]
+AIM:		Post my code onto stackoverflow.com to find a solution to joining my two tables correctly.
+
+OUTCOME:	It appears that my syntax was incorrect.
+			The way I was trying to join "Salary.id" onto the test2_table was wrong.
+			Basically in the wages variable (where we set our relationship with the secondary table to the primary), I needed to reset the primaryjoin to Salary.test_id; test_id is the column in the salary table where we have the foreign key constraint.
+			CODE: primaryjoin="Test_db_02.id == Salary.test2_id"
+			Also I had to make a few small changes to the syntax database query; before when joining the two tables (with .join()), I had incorrectly set it wrong.  ".join(test2_table.salary)" are the names of the two tables that I'm joinning; These are the two tables names that have been set for the database in their respective classes.  The correct code is visble below. 
+			CORRECT CODE: db_entry = session.query(Test_db_02).join(Test_db_02.salary)
+			Need to find a way to query the tables after they have been joined.
+
+CONCLUSION:	When the class name and the table name are different it becomes a little tricky to tell apart.  This is vital beacuse in some code (like when joining two tables together) you need to tell the difference from both; if you get them mixed up it wil break your code.
+
+
+
+# TP-8		[test3.py]
 AIM:		To create a platform to send an email of the report entries to any given email supplied by the user.
 
 OUTCOME:	I had to recreate my main table on the PSQL command line - test3_table.
@@ -99,3 +114,11 @@ OUTCOME:	I had to recreate my main table on the PSQL command line - test3_table.
 			I included some more entries into html reports page; within each jinja iterable template, included an input email & send email tag.  With the iput email assigned to a name attribute, it becomes easier to select the value and pass it into my python variable.
 			** I used the "try:" method for the first time but it didn't work.
 			I need to find a way to execute two different buttons (to give two different outcomes) in the same form tag.
+			I post my code to stackoverflow.com to see if I could find a solution; in the meantime I will now work on my first version of my jobs log (without the email functionality).
+
+# TP-9		[jobs_log_01.py]
+AIM:		Create my first version of my jobs log web app.
+			Must contain: 
+			A date input, time input, choose the type of job, write any descriptions, chose an outcome, write any comments about the job, date & time stamp 
+
+OUTCOME:	

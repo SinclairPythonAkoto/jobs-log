@@ -5,7 +5,7 @@ app = Flask(__name__)
 from sqlalchemy.orm import sessionmaker, relationship
 
 # # this part is needed to create session to query database.  this should be JUST BELOW app.config..
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, select
 meta = MetaData()
 engine = create_engine("postgresql://postgres:161086@localhost/test-db-01", echo = True)
 from sqlalchemy.ext.declarative import declarative_base
@@ -15,13 +15,15 @@ Base = declarative_base()
 class  Test_db_02(Base):
 	__tablename__ = 'test2_table'
 	id = Column('id', Integer, primary_key=True)
+	date = Column('date', String(10))
 	name = Column('name', String(40),)
 	age = Column('age', Integer,)
 	profession = Column('profession', String(60),)
 	city = Column('city', String(60),)
 	country = Column('country', String(40),)	
 
-	def __init__(self, name, age, profession, city, country):
+	def __init__(self, date, name, age, profession, city, country):
+		self.date = date
 		self.name = name
 		self.age = age
 		self.profession = profession
@@ -34,12 +36,7 @@ class Salary(Base):
 	wage = Column('wage', String(20))
 	test2_id = Column('test2_id' ,Integer, ForeignKey('test2_table.id'))
 	
-	wages = relationship("Test_db_02", backref="salary", primaryjoin="Test_db_02.id == Salary.id")
-
-# Test_db_02.salary = relationship(
-# 	"Salary", order_by=Salary.id, backref="test2_table")
-
-
+	wages = relationship("Test_db_02", backref="salary", primaryjoin="Test_db_02.id == Salary.test2_id")
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -58,7 +55,7 @@ def home():
 		city = request.form.get('city')
 		country = request.form.get('country')
 
-		db_entry = Test_db_02(name, age, profession, city, country)
+		db_entry = Test_db_02(date_log,name, age, profession, city, country)
 		session.add(db_entry)
 		session.commit()
 		data = session.query(Test_db_02).all()
@@ -81,20 +78,8 @@ def reports():
 			return render_template('reports.html', data_age=data_age)
 
 		elif request.form.get("report_options") == "media_prof":
-			# q = session.query(User).join(User.addresses)
-			# SELECT user.* FROM user JOIN address ON user.id = address.user_id
-			db_entry = session.query(Test_db_02).join(test2_table.salary)
-
-			#db_entry = select([test2_table.c.date, test2_table.c.name, test2_table.c.age, test2_table.c.profession, test2_table.c.city, test2_table.c.country, salary.c.wage]).select_from(test2_table.join(salary))
-			#db_entry.filter(select[test2_table.c.profession] == 'media')
-			#db_entry = session.query(Test_db_02, Salary).select_from(Salary).join(salary)
-			#db_entry.filter([Test_db_02.profession=='media'])
+			db_entry = session.query(Test_db_02).join(Test_db_02.salary).filter(Test_db_02.profession=='media') # this works but only salary object given back			
 			media_prof = db_entry.all()
-			# db_entry = session.query(Test_db_02)#.join(Test_db_02.yearly_salary)#.filter(Test_db_02.profession=='media')
-			# db_entry.filter(Test_db_02.profession=='media')
-			# media_prof = db_entry.all()
-			# sal = session.query(Yearly_Salary).order_by(Yearly_Salary.id)
-			# sal_prof = sal.all()
 			return render_template('reports.html', media_prof=media_prof)
 
 
@@ -127,12 +112,6 @@ def reports():
 			# this redirects you back to page if
 			# button pressed without selecting a category to run
 			return redirect(url_for('reports'))
-
-
-
-# select([test2_table.c.date, test2_table.c.name, test2_table.c.age, test2_table.c.profession, test2_table.c.city, test2_table.c.country, salary.c.wage]).select_from(test2_table.join(salary))
-
-
 
 
 if __name__ == '__main__':
