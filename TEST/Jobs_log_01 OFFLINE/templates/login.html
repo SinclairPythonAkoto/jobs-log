@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Login</h1>
+
+<p>Please login below to gain access.</p>
+<br>
+<br>
+<form action="{{ url_for('login') }}" method="post">
+<table>
+	<tr>
+		<th>USERNAME</th>
+		<TH>PASSWORD</TH>
+	</tr>
+	<tr>
+		<td><input type="text" name="user" placeholder="Enter Username"></td>
+		<td><input type="password" name="password" placeholder="Enter Password"></td>
+	</tr>	
+</table>
+
+<br>
+<br>
+<button type="submit">LOGIN</button>
+</form>
+
+{% endblock %}

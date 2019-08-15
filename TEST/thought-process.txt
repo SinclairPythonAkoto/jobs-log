@@ -121,4 +121,10 @@ AIM:		Create my first version of my jobs log web app.
 			Must contain: 
 			A date input, time input, choose the type of job, write any descriptions, chose an outcome, write any comments about the job, date & time stamp 
 
-OUTCOME:	
+OUTCOME:	When trying to store the time & date stamp, I creayted the columns as 'VARCHAR' so it meant that when I entred a log from my app it wasn't being stored.
+			I realised I can store both the date & time separetely in SQL as 'DATE' & 'TIME' datatypes.
+			So I quickly dropped (deleted) the table and started again.
+			The "TRUNCATE TABLE" statement is used to delete the data inside a table, but not the table itself.  "TRUNCATE TABLE table_name;"
+			This quickly solved my problem and allowed me to move on.
+			I will add flash messages to my app to give error warnings.
+			** I tried to use flash but I needed a secret key in order for it to work; I have seen this before but I didn't know that it's also needed to use flash messages.  I will look into this when I do further studies & rebuilds of this web app.

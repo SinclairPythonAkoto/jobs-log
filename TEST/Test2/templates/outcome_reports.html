@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>AV Jobs Log Reports</h1>
+<br>
+<br>
+<p>Please select the report you wish to run below.</p>
+
+<form action="{{ url_for('outcome_reports') }} " method="post">
+	<div>
+		<table>
+			<tr>
+				<th>TEST Reports</th>
+			</tr>
+			<tr>
+				<td>
+		            <select name="job_outcome">
+		               <option disabled selected value="">Select Job Outcome</option>
+		               <option value="resolved">Issue Resolved</option>
+		               <option value="ongoing">Ongoing Issue</option>
+		               <option value="ordered_new_parts">Ordered New Parts</option>
+		               <option value="escalated_3p">Escalated - Third Party</option>
+		               <option value="complete">Project Completed</option>
+		            </select> 
+		         </td>
+			</tr>
+			<tr>
+				<th>
+					<button type="submit">RUN REPORT</button>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+
+
+	<div>
+		<table>
+			{% if outcome_reports %}
+			<h2>Resolved AV Jobs</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		      	{% for d in outcome_reports %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+
+			{% if ongoing_jobs %}
+			<h2>Ongoing AV Jobs</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		      	{% for d in ongoing_jobs %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if new_parts %}
+		    <h2>Ordered New Parts</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in new_parts %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if escalate %}
+		    <h2>Ecalated Jobs</h2>
+		    <h6>Jobs that have been escalated to a <strong>third party</strong>.</h6>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in escalate %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if finish %}
+		    <h2>Completed Projects</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in finish %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+	    </table>
+	</div>
+</form>
+<br>
+<br>
+
+<footer>
+	<a href="{{ url_for('home') }}">Home</a>
+</footer>
+{% endblock %}

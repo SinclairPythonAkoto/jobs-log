@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h4>Jobs Log 0.1 OFFLINE</h4>
+<h5>offline version of my jobs log.</h5>
+
+<h1>AV Jobs Log</h1>
+
+<p>Please enter your details <strong>below</strong>.</p>
+
+<form action="{{ url_for('home') }}" method="post">
+  <div>
+    <table>
+      <tr>
+        <th>DATE</th>
+        <th>TIME</th>
+        <th>JOB</th>
+        <th>DESCRIPTION</th>
+        <th>OUTCOME</th>
+        <th>COMMENTS</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="date" name="date_log">
+        </td>
+        <td>
+          <input type="time" name="time_log" placeholder="Name" required>
+        </td>
+        <td>
+          <select name="job_options">
+            <option disabled selected value="">Select Job Type</option>
+            <option value="installs">Installs</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="room_checks">Room Checks</option>
+            <option value="audit_checks">Audit Checks</option>
+            <option value="project_installs">Project Installs</option>
+          </select>
+        </td>
+        <td>
+          <textarea row="3" cols="25%" placeholder="Enter Description" name="description"></textarea>
+        </td>
+        <td>
+          <select name="job_outcome">
+            <option disabled selected value="">Select Job Outcome</option>
+            <option value="resolved">Issue Resolved</option>
+            <option value="ongoing">Ongoing Issue</option>
+            <option value="ordered_new_parts">Ordered New Parts</option>
+            <option value="escalate">Escalated - Third Party</option>
+            <option value="complete">Project Completed</option>
+          </select>
+        </td>
+        <td>
+          <textarea rows="3" cols="25%" placeholder="Additional Comments" name="comments"></textarea>
+        </td>
+      </tr>
+    </table>
+    <button type="submit">SUBMIT LOG</button>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div>
+    <br>
+    <p>Click <a href="{{ url_for('jobs_report') }}">here</a> to run a report on <strong>AV Jobs</strong>.</p>
+    <br>
+    <p>Click <a href="{{ url_for('outcome_reports') }}">here</a> to run a report on <strong>Outcome</strong>.</p>
+  </div>
+  <br>
+  <br>
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Job</th>
+        <th>Description</th>
+        <th>Outcome</th>
+        <th>Additional Comments</th>
+        <th>Date Stamp</th>
+        <th>Time Stamp</th>
+      </tr>
+      {% for d in data %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.date }}</td>
+          <td>{{ d.time }}</td>
+          <td>{{ d.job }}</td>
+          <td>{{ d.description }}</td>
+          <td>{{ d.outcome }}</td>
+          <td>{{ d.comments }}</td>
+          <td>{{ d.date_stamp }}</td>
+          <td>{{ d.time_stamp }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</form>
+
+{% endblock %}

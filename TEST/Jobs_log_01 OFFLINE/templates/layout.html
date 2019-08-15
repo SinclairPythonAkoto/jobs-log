@@ -22,18 +22,10 @@
         }
     </style>
     <body>
-        
-        <div class="container">
+        {% block body %}
 
-            {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
 
-            {% block content %}{% endblock %}
-
-            <!-- flash messages -->
-            {% for messages in get_flashed_messages() %}
-                {{ messages }}
-            {% endfor %}
-        </div>
-
+        {% endblock %}
     </body>
 </html>
