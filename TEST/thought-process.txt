@@ -134,3 +134,5 @@ AIM:		Create a navigation bar at the top of each page that will direct you to jo
 
 OUTCOME:	Found a way to create a naigation bar at the top of the screen (through w3schools.com);
 			I remembered you can create a class within a tag and then give it a styling in the "style" tag, and refrence the class name by ".CLASS-NAME"
+			This works PERFECTLY! Now I know that I can apply this to when I'm building my portforlio.
+			Also, I will look into how I can change the "style" tag and replace it with a CSS file with all the style attributes inside.
