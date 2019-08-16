@@ -1,0 +1,189 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>AV Jobs Log Reports</h1>
+<br>
+<br>
+<p>Please select the report you wish to run below.</p>
+
+<form action="{{ url_for('jobs_report') }} " method="post">
+	<div>
+		<table>
+			<tr>
+				<th>Job Reports</th>
+			</tr>
+			<tr>
+				<td>
+					<select name="report_options">
+						<option disabled selected value="">Select Report Type</option>
+						<option value="installs">Installs</option>
+						<option value="maintenance">Maintenance</option>
+						<option value="room_checks">Room Checks</option>
+						<option value="audit_checks">Room Audit Checks</option>
+						<option value="project_intsalls">Project Installs</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<button type="submit">RUN REPORT</button>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+
+
+	<div>
+		<table>
+			{% if install_report %}
+			<h2>AV Install Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		      	{% for d in install_report %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+
+			{% if maintenance_report %}
+			<h2>AV Maintenance Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		      	{% for d in maintenance_report %}
+		        <tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		      	{% endfor %}
+		    {% endif %}
+
+		    {% if room_report %}
+		    <h2>Room Check Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in room_report %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if audit_report %}
+		    <h2>Audit Check Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in audit_report %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+
+		    {% if project_report %}
+		    <h2>Project Install Reports</h2>
+		    	<tr>
+		    		<th>ID</th>
+			        <th>Date</th>
+			        <th>Time</th>
+			        <th>Job</th>
+			        <th>Description</th>
+			        <th>Outcome</th>
+			        <th>Additional Comments</th>
+			        <th>Date Stamp</th>
+			        <th>Time Stamp</th>
+			     </tr>
+		    	{% for d in project_report %}
+	    		<tr>
+		        	<td>{{ d.id }}</td>
+			        <td>{{ d.date }}</td>
+			        <td>{{ d.time }}</td>
+			        <td>{{ d.job }}</td>
+			        <td>{{ d.description }}</td>
+			        <td>{{ d.outcome }}</td>
+			        <td>{{ d.comments }}</td>
+			        <td>{{ d.date_stamp }}</td>
+			        <td>{{ d.time_stamp }}</td>
+		        </tr>
+		    	{% endfor %}
+		    {% endif %}
+	    </table>
+	</div>
+</form>
+<br>
+<br>
+
+<footer>
+	<a href="{{ url_for('outcome_reports') }}">Outcome Reports</a><br><a href="{{ url_for('home') }}">Home</a>
+</footer>
+{% endblock %}
