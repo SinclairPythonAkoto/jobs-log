@@ -128,3 +128,9 @@ OUTCOME:	When trying to store the time & date stamp, I creayted the columns as '
 			This quickly solved my problem and allowed me to move on.
 			I will add flash messages to my app to give error warnings.
 			** I tried to use flash but I needed a secret key in order for it to work; I have seen this before but I didn't know that it's also needed to use flash messages.  I will look into this when I do further studies & rebuilds of this web app.
+
+# TP-10		[jobs_log_01.py]
+AIM:		Create a navigation bar at the top of each page that will direct you to job reports & outcome reports page.
+
+OUTCOME:	Found a way to create a naigation bar at the top of the screen (through w3schools.com);
+			I remembered you can create a class within a tag and then give it a styling in the "style" tag, and refrence the class name by ".CLASS-NAME"
