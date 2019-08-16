@@ -27,13 +27,13 @@ class  JobsLog_01(Base):
 	__tablename__ = 'jobslog_01'
 	id = Column('id', Integer, primary_key=True)
 	date = Column('date', String(10))
-	time = Column('time', String(10))
+	time = Column('time', String(5))
 	job = Column('job', String(25))
 	description = Column('description', String(200))
 	outcome = Column('outcome', String(20))
 	comments = Column('comments', String(300))
 	date_stamp = Column('date_stamp', String(10)) 
-	time_stamp = Column('time_stamp', String(10))
+	time_stamp = Column('time_stamp', String(5))
 
 	def __init__(self, date, time, job, description, outcome, comments, date_stamp, time_stamp):
 		self.date = date
